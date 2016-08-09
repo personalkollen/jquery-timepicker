@@ -512,7 +512,7 @@
 
             var row = $('<li />');
             row.data('time', timeInt);
-            row.text(_int2time(timeInt, settings.timeFormat));
+            row.text(_int2time(timeInt, settings));
 
             if (preset.text) {
                 var description = $('<span />');
