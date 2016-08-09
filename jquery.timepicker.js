@@ -27,7 +27,7 @@
 		decimal: '.',
 		mins: 'mins',
 		hr: 'hr',
-		hrs: 'hrs'
+		hrs: 'hrs',
 	};
 
 	var methods = {
@@ -417,6 +417,10 @@
 			}
 		}
 
+        if (!settings.presets) {
+            settings.presets = [];
+        }
+
 		return settings;
 	}
 
@@ -468,6 +472,10 @@
 			wrapped_list.addClass('ui-timepicker-step-'+settings.step);
 		}
 
+        if (settings.presets.length) {
+            wrapped_list.addClass('ui-timepicker-with-presets');
+        }
+
 		var durStart = settings.minTime;
 		if (typeof settings.durationTime === 'function') {
 			durStart = _time2int(settings.durationTime());
@@ -497,6 +505,24 @@
 				return settings.step;
 			}
 		}
+
+        for (var i = 0; i < settings.presets.length; i++) {
+            var preset = settings.presets[i];
+            var timeInt = _time2int(preset.value);
+
+            var row = $('<li />');
+            row.data('time', timeInt);
+            row.text(_int2time(timeInt, settings.timeFormat));
+
+            if (preset.text) {
+                var description = $('<span />');
+                description.addClass('ui-timepicker-preset-description');
+                description.text(preset.text);
+                row.append(description);
+            }
+
+            list.append(row);
+        }
 
 		for (var i=start, j=0; i <= end; j++, i += stepFunc(j)*60) {
 			var timeInt = i;

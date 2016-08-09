@@ -12,7 +12,8 @@
 	margin: 0;
 }
 
-.ui-timepicker-wrapper.ui-timepicker-with-duration {
+.ui-timepicker-wrapper.ui-timepicker-with-duration,
+.ui-timepicker-wrapper.ui-timepicker-with-presets {
 	width: 13em;
 }
 
@@ -35,6 +36,14 @@
 	color: #888;
 }
 
+.ui-timepicker-preset-description {
+    color: #888;
+    display: block;
+    font-size: 0.8em;
+    line-height: 0.8em;
+    margin-bottom: 0.2em;
+}
+
 .ui-timepicker-list li {
 	padding: 3px 0 3px 5px;
 	cursor: pointer;
@@ -55,7 +64,9 @@ li.ui-timepicker-selected,
 }
 
 li.ui-timepicker-selected .ui-timepicker-duration,
-.ui-timepicker-list li:hover .ui-timepicker-duration {
+.ui-timepicker-list li:hover .ui-timepicker-duration,
+li.ui-timepicker-selected .ui-timepicker-preset-description,
+.ui-timepicker-list li:hover .ui-timepicker-preset-description {
 	color: #ccc;
 }
 
