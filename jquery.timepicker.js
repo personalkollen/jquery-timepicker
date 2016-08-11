@@ -377,7 +377,11 @@
 			settings.scrollDefault = function() {
 				return settings.roundingFunction(_time2int(val), settings);
 			}
-		} else if (settings.minTime) {
+		} else if (settings.presets) {
+            settings.scrollDefault = function() {
+                return settings.presets[0].value;
+            }
+        } else if (settings.minTime) {
 			settings.scrollDefault = function() {
 				return settings.roundingFunction(settings.minTime, settings);
 			}
@@ -1228,6 +1232,10 @@
 		noneOption: false,
 		orientation: 'l',
 		roundingFunction: function(seconds, settings) {
+            if(settings.presets.some(function (preset) { return preset.value === seconds; })) {
+                return seconds;
+            }
+
 			if (seconds === null) {
 				return null;
 			} else if (typeof settings.step !== "number") {
