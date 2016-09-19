@@ -1,5 +1,5 @@
 /*!
- * jquery-timepicker v1.11.4 - A jQuery timepicker plugin inspired by Google Calendar. It supports both mouse and keyboard navigation.
+ * jquery-timepicker v1.11.5 - A jQuery timepicker plugin inspired by Google Calendar. It supports both mouse and keyboard navigation.
  * Copyright (c) 2015 Jon Thornton - http://jonthornton.github.com/jquery-timepicker/
  * License: MIT
  */
@@ -71,7 +71,7 @@
 						self.on('keydown.timepicker', _disableTextInputHandler);
 					}
 
-					_formatValue.call(self.get(0));
+					_formatValue.call(self.get(0), null, 'initial');
 				}
 			});
 		},
@@ -778,7 +778,11 @@
 		});
 
 		if (settings.forceRoundTime) {
-			seconds = settings.roundingFunction(seconds, settings);
+			var roundSeconds = settings.roundingFunction(seconds, settings);
+			if (roundSeconds != seconds) {
+				seconds = roundSeconds;
+				origin = null;
+			}
 		}
 
 		var prettyTime = _int2time(seconds, settings);
@@ -788,7 +792,7 @@
 				self.trigger('timeRangeError');
 			}
 		} else {
-			_setTimeValue(self, prettyTime);
+			_setTimeValue(self, prettyTime, origin);
 		}
 	}
 
@@ -817,7 +821,7 @@
 			self.data('ui-timepicker-value', value);
 			if (source == 'select') {
 				self.trigger('selectTime').trigger('changeTime').trigger('change', 'timepicker');
-			} else if (source != 'error') {
+			} else if (['error', 'initial'].indexOf(source) == -1) {
 				self.trigger('changeTime');
 			}
 
