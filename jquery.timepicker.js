@@ -368,6 +368,10 @@
 			settings.durationTime = _time2int(settings.durationTime);
 		}
 
+        if (!settings.presets) {
+            settings.presets = [];
+        }
+        
 		if (settings.scrollDefault == 'now') {
 			settings.scrollDefault = function() {
 				return settings.roundingFunction(_time2int(new Date()), settings);
@@ -377,7 +381,7 @@
 			settings.scrollDefault = function() {
 				return settings.roundingFunction(_time2int(val), settings);
 			}
-		} else if (settings.presets) {
+		} else if (settings.presets.length) {
             settings.scrollDefault = function() {
                 return settings.presets[0].value;
             }
@@ -420,10 +424,6 @@
 				}
 			}
 		}
-
-        if (!settings.presets) {
-            settings.presets = [];
-        }
 
 		return settings;
 	}
