@@ -1,10 +1,10 @@
 {
-	"name": "timepicker",
-	"version": "1.11.9",
+	"name": "timepicker-pk",
+	"version": "1.11.9+presets",
 	"title": "jquery-timepicker",
 	"author": {
-		"name": "Jon Thornton",
-		"url": "https://github.com/jonthornton"
+		"name": "Andreas Pelme",
+		"url": "https://github.com/pelme"
 	},
 	"license": "MIT",
 	"dependencies": {
